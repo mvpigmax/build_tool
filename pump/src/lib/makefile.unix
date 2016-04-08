@@ -4,7 +4,7 @@ all: pump.a
 
 pump.a: vector.o stack.o sgml.o pumpsys.o pump.o env.o
 	ar -r pump.a vector.o stack.o sgml.o pumpsys.o pump.o env.o
-	cp pump.a ../../lib
+	#cp pump.a ../../lib
 
 vector.o: vector.cpp vector.h
 	$(CC) -c vector.cpp
@@ -24,3 +24,12 @@ pump.o: pump.cpp pump.h env.h
 env.o: env.cpp env.h sgml.h stack.h
 	$(CC) -c env.cpp
 
+install_dir=$(HOME)/local/pump
+install:
+	if [ ! -d $(install_dir)/lib ]; then mkdir -p $(install_dir)/lib; fi
+	if [ ! -d $(install_dir)/include ]; then mkdir $(install_dir)/include; fi
+	cp pump.a $(install_dir)/lib/
+	cp *.h $(install_dir)/include/
+
+clean:
+	rm -rf *.o pump.a

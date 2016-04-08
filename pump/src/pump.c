@@ -73,12 +73,13 @@ int main(int argc,char *argv[])
 	}
 	run_command("tplmake /tmp/pumptmp.cpp %s",argv[2]);
 	run_command("g++ -I /usr/local/pump/include -o /tmp/pumptmp /tmp/pumptmp.cpp /usr/local/pump/lib/pump.a");
+	//run_command("g++ -I /home/zhr/local/pump/include -o /tmp/pumptmp /tmp/pumptmp.cpp /home/zhr/local/pump/lib/pump.a");
 	sprintf(command_buffer,"/tmp/pumptmp %s",argv[1]);
 	for (i=3;i<argc;i++)
 	{
 		sprintf(command_buffer+strlen(command_buffer)," %s",argv[i]);
 	}
-	printf("!!!! %s\n",command_buffer);	
+	printf("!!!! %s\n",command_buffer);
 	run_command(command_buffer);
 	my_exit(0);
 	return 0;
