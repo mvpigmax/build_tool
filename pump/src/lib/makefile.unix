@@ -7,22 +7,22 @@ pump.a: vector.o stack.o sgml.o pumpsys.o pump.o env.o
 	#cp pump.a ../../lib
 
 vector.o: vector.cpp vector.h
-	$(CC) -c vector.cpp
+	$(CC) -Wall -c vector.cpp
 
 stack.o: stack.cpp stack.h vector.h
-	$(CC) -c stack.cpp
+	$(CC) -Wall -c stack.cpp
 
 sgml.o: sgml.cpp sgml.h vector.h pumpsys.h
-	$(CC) -c sgml.cpp
+	$(CC) -Wall -c sgml.cpp
 
 pumpsys.o: pumpsys.cpp pumpsys.h
-	$(CC) -c pumpsys.cpp
+	$(CC) -Wall -c pumpsys.cpp
 
 pump.o: pump.cpp pump.h env.h
-	$(CC) -c pump.cpp
+	$(CC) -Wall -c pump.cpp
 
 env.o: env.cpp env.h sgml.h stack.h
-	$(CC) -c env.cpp
+	$(CC) -Wall -c env.cpp
 
 install_dir=$(HOME)/local/pump
 install:
