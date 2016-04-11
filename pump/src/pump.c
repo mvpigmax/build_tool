@@ -12,10 +12,12 @@ const char *output_file="";
 
 void my_exit(int status)
 {
-	unlink("/tmp/pumptmp.cpp2");
-	unlink("/tmp/pumptmpi2");
+	unlink("pumptmp.cpp2");
+	unlink("pumptmpi2");
 	if (status!=0)
 		unlink(output_file);
+	unlink("./pumptmp");
+	unlink("pumptmp.cpp");
 	exit(status);
 }
 
@@ -26,7 +28,7 @@ void run_command(const char *format,...)
 	static char buffer[200];
 	int result,status;
 	va_list v;
-	char *arg_list[MAX_ARG];
+	//char *arg_list[MAX_ARG];
 	char *args[MAX_ARG];
 	int i;
 	static char command_buffer[200];
@@ -71,10 +73,10 @@ int main(int argc,char *argv[])
 		fprintf(stderr,"%s <output file> <template file> <enviroment files>\n",argv[0]);
 		return 1;
 	}
-	run_command("tplmake /tmp/pumptmp.cpp %s",argv[2]);
-	run_command("g++ -I /usr/local/pump/include -o /tmp/pumptmp /tmp/pumptmp.cpp /usr/local/pump/lib/pump.a");
+	run_command("tplmake pumptmp.cpp %s",argv[2]);
+	run_command("g++ -I /usr/local/pump/include -o ./pumptmp ./pumptmp.cpp /usr/local/pump/lib/pump.a");
 	//run_command("g++ -I /home/zhr/local/pump/include -o /tmp/pumptmp /tmp/pumptmp.cpp /home/zhr/local/pump/lib/pump.a");
-	sprintf(command_buffer,"/tmp/pumptmp %s",argv[1]);
+	sprintf(command_buffer,"./pumptmp %s",argv[1]);
 	for (i=3;i<argc;i++)
 	{
 		sprintf(command_buffer+strlen(command_buffer)," %s",argv[i]);

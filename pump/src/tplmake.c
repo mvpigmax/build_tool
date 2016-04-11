@@ -68,7 +68,7 @@ void initStringBuffer(TLongStringBuffer *pBuffer)
 
 void append(TLongStringBuffer *pBuffer,const char *info)
 {
-	while (pBuffer->stringBufferLength+strlen(info)>=pBuffer->stringBufferSize)
+	while (pBuffer->stringBufferLength+(int)(strlen(info))>=pBuffer->stringBufferSize)
 	{
 		pBuffer->stringBuffer=(char *)realloc(pBuffer->stringBuffer,
 			pBuffer->stringBufferSize+BUFFER_INC_SIZE);

@@ -85,7 +85,6 @@ int resolve_name(env_type *p_this_node,const char *name,env_type **p_result_node
 	if (p_dot!=NULL)
 	{
 		char buffer[40];
-		int i;
 		env_type *this_son;
 		strncpy(buffer,name,p_dot-name);
 		buffer[p_dot-name]='\0';
