@@ -372,7 +372,7 @@ INCLUDEDIR=!!travel project!! $(!!@name!!_includedir) !!next!!
 			!!endif!!
 			!!let am_copytargetall=addstring(@am_copytargetall,addstring(" ",@am_copytarget))!!
 !!@am_copytarget!!:!!@am_copysource!!
-	$(COPY) !!@am_copysource!! !!@am_copytarget!! >> output
+	$(COPY) !!@am_copysource!! !!@am_copytarget!! # >> output
 		!!elseif !strcmp(@am_command,"pump")!!
 			!!if !strcmp(@am_pumptarget,"notdefined")!!
 				!!error printf("target not defined for pump command in package '%s'",@am_packagename)!!
@@ -383,7 +383,7 @@ INCLUDEDIR=!!travel project!! $(!!@name!!_includedir) !!next!!
 			!!endif!!
 			!!let am_pumptargetall=multiaddstring(3,@am_pumptargetall," ",@am_pumptarget)!!
 !!@am_pumptarget!!:!!@am_pumptpl!! !!@am_pumpenv!!
-	$(PUMP) !!@am_pumptarget!! !!@am_pumptpl!! !!@am_pumpenv!! >> output
+	$(PUMP) !!@am_pumptarget!! !!@am_pumptpl!! !!@am_pumpenv!! # >> output
 		!!endif!!
 	!!next!!
 !!next!!
@@ -395,17 +395,17 @@ pumptargetall=!!@am_pumptargetall!!
 !!if !strcmp(@targettype,"dll")!!
 	!!if !strcmp(@am_platform,"WINDOWS")!!
 $(target): $(all_objs)
-	$(LINK) $(DLLARFLAGS) !!@am_output_ldindicate!!$@ !!@am_implib_ldindicate!!!!@am_packageworkdir!!!!@target!!!!@am_lib_suffix!! $(all_objs) $(all_libs) $(LIBS) >> output	
+	$(LINK) $(DLLARFLAGS) !!@am_output_ldindicate!!$@ !!@am_implib_ldindicate!!!!@am_packageworkdir!!!!@target!!!!@am_lib_suffix!! $(all_objs) $(all_libs) $(LIBS) # >> output
 	!!else!!
 $(target): $(all_objs)
-	$(LINK) $(DLLARFLAGS) !!@am_output_ldindicate!!$@ $(all_objs) $(all_libs) $(LIBS) >> output	
+	$(LINK) $(DLLARFLAGS) !!@am_output_ldindicate!!$@ $(all_objs) $(all_libs) $(LIBS) # >> output
 	!!endif!!
 !!elseif !strcmp(@targettype,"exe")!!
 $(target): $(all_objs)
-	$(LINK) $(LDFLAGS) !!@am_output_ldindicate!!$@ $(all_objs) $(all_libs) $(LIBS) >> output
+	$(LINK) $(LDFLAGS) !!@am_output_ldindicate!!$@ $(all_objs) $(all_libs) $(LIBS) # >> output
 !!elseif !strcmp(@targettype,"lib")!!
 $(target): $(all_objs)
-	$(LIB32) $(LIBARFLAGS) !!@am_output_ldindicate!!$@ $(all_objs) >> output
+	$(LIB32) $(LIBARFLAGS) !!@am_output_ldindicate!!$@ $(all_objs) # >> output
 !!endif!!
 
 !!leave!!
@@ -428,3 +428,6 @@ clean:
 pump: $(pumptargetall)
 
 !!leave!!
+
+obj_clean:
+	find ../../source/ -name "*.o" | xargs rm -rf {}

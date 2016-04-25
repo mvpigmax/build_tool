@@ -4,7 +4,8 @@ all: pump.a
 
 pump.a: vector.o stack.o sgml.o pumpsys.o pump.o env.o
 	ar -r pump.a vector.o stack.o sgml.o pumpsys.o pump.o env.o
-	cp pump.a ../../lib
+	mv pump.a ../../lib
+	rm *.o
 
 vector.o: vector.cpp vector.h
 	$(CC) -c vector.cpp
