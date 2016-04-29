@@ -26,7 +26,7 @@ env.o: env.cpp env.h sgml.h stack.h
 	$(CC) -c env.cpp
 
 
-install_dir=$(HOME)/local/pump_
+install_dir=/usr/local/pump
 install:
 	if [ ! -d $(install_dir)/lib ]; then mkdir -p $(install_dir)/lib; fi
 	if [ ! -d $(install_dir)/include ]; then mkdir $(install_dir)/include; fi
