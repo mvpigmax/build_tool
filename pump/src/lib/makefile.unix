@@ -4,32 +4,34 @@ all: pump.a
 
 pump.a: vector.o stack.o sgml.o pumpsys.o pump.o env.o
 	ar -r pump.a vector.o stack.o sgml.o pumpsys.o pump.o env.o
-	#cp pump.a ../../lib
+	mv pump.a ../../lib
+	rm *.o
 
 vector.o: vector.cpp vector.h
-	$(CC) -Wall -c vector.cpp
+	$(CC) -c vector.cpp
 
 stack.o: stack.cpp stack.h vector.h
-	$(CC) -Wall -c stack.cpp
+	$(CC) -c stack.cpp
 
 sgml.o: sgml.cpp sgml.h vector.h pumpsys.h
-	$(CC) -Wall -c sgml.cpp
+	$(CC) -c sgml.cpp
 
 pumpsys.o: pumpsys.cpp pumpsys.h
-	$(CC) -Wall -c pumpsys.cpp
+	$(CC) -c pumpsys.cpp
 
 pump.o: pump.cpp pump.h env.h
-	$(CC) -Wall -c pump.cpp
+	$(CC) -c pump.cpp
 
 env.o: env.cpp env.h sgml.h stack.h
-	$(CC) -Wall -c env.cpp
+	$(CC) -c env.cpp
 
-install_dir=$(HOME)/local/pump
+
+install_dir=$(HOME)/local/pump_
 install:
 	if [ ! -d $(install_dir)/lib ]; then mkdir -p $(install_dir)/lib; fi
 	if [ ! -d $(install_dir)/include ]; then mkdir $(install_dir)/include; fi
-	cp pump.a $(install_dir)/lib/
-	cp *.h $(install_dir)/include/
+	cp ../../lib/* $(install_dir)/lib/
+	cp pump.h $(install_dir)/include/
 
 clean:
-	rm -rf *.o pump.a
+	rm -rf *.o ../../lib/pump.a

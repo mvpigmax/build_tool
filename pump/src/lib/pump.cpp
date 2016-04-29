@@ -269,7 +269,10 @@ void display_string(const char * string)
 		{
 			fprintf(output,"%s\n",remain_buffer);
 		}
-		strcpy(remain_buffer,p_return+1);
+		//strcpy(remain_buffer,p_return+1);
+		memmove(remain_buffer,p_return+1,strlen(p_return+1));
+		*(remain_buffer + strlen(p_return+1)) = 0;
+
 		use_pump_command=0;
 	}
 #endif

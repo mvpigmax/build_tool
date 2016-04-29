@@ -1,12 +1,20 @@
-mkdir bin
-mkdir include
-mkdir lib
-cp src/lib/pump.h include
+#!/bin/bash
+if [ ! -d bin ]; then
+    mkdir bin
+fi
+if [ ! -d lib ]; then
+    mkdir lib
+fi
+if [ ! -d include ]; then
+    mkdir include
+fi
+
+cp src/lib/pump.h include/
 cd src
 cp pump.c.unix pump.c
 cp makefile.unix makefile
-make
+make && make install
 cd lib
 cp makefile.unix makefile
-make
+make && make install
 cd ../..

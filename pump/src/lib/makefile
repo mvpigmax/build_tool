@@ -25,3 +25,13 @@ pump.o: pump.cpp pump.h env.h
 env.o: env.cpp env.h sgml.h stack.h
 	$(CC) -c env.cpp
 
+
+install_dir=$(HOME)/local/pump_
+install:
+	if [ ! -d $(install_dir)/lib ]; then mkdir -p $(install_dir)/lib; fi
+	if [ ! -d $(install_dir)/include ]; then mkdir $(install_dir)/include; fi
+	cp ../../lib/* $(install_dir)/lib/
+	cp pump.h $(install_dir)/include/
+
+clean:
+	rm -rf *.o ../../lib/pump.a

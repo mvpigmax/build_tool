@@ -18,3 +18,11 @@ clearemptylines: clearemptylines.c
 	$(CC) -o clearemptylines clearemptylines.c
 	mv clearemptylines ../bin
 
+
+install_dir=/cffex/zhr/local/pump_
+install:
+	if [ ! -d $(install_dir)/bin ];  then mkdir -p $(install_dir)/bin; fi;
+	cp -r ../bin/* $(install_dir)/bin/
+
+clean:
+	rm -rf ../bin/*

@@ -1,2 +1,2 @@
-amakeroot=/usr/local/amake
+amakeroot=$(cd `dirname $0` && pwd)
 make -f $amakeroot/mac/makefile.mac prjfile=$1 amakeroot=$amakeroot
