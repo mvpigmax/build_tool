@@ -14,9 +14,9 @@ cd src
 cp pump.c.unix pump.c
 cp makefile.unix makefile
 make
-#make install
+make install
 cd lib
 cp makefile.unix makefile
 make
-#make install
+make install
 cd ../..
